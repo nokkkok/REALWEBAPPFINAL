@@ -1,31 +1,133 @@
+/* ============================================================
+   FitMatch — CSS Variables (ธีมหลัก)
+   ============================================================ */
+:root {
+  --fm-bg:          #1a1a1a;   /* พื้นหลังทั้งหน้า */
+  --fm-surface:     #2a2a2a;   /* พื้น card / panel */
+  --fm-surface-2:   #333333;   /* card ชั้นใน / input */
+  --fm-border:      #3a3a3a;   /* เส้นขอบ */
+  --fm-accent:      #4ade80;   /* สีเขียว accent (FIT) */
+  --fm-accent-dim:  #22c55e;   /* เขียวเข้มกว่า */
+  --fm-text:        #f0f0f0;   /* ข้อความหลัก */
+  --fm-text-muted:  #888888;   /* ข้อความรอง */
+  --fm-navbar-h:    56px;      /* ความสูง navbar */
+}
+
+/* ============================================================
+   Base — body & html
+   ============================================================ */
 html {
   font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
   position: relative;
   min-height: 100%;
 }
 
+@media (min-width: 768px) {
+  html { font-size: 16px; }
+}
+
 body {
-  margin-bottom: 60px;
+  margin: 0;
+  background-color: var(--fm-bg);
+  color: var(--fm-text);
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* ============================================================
+   Navbar
+   ============================================================ */
+
+/* แถบ navbar หลัก */
+.fm-navbar {
+  height: var(--fm-navbar-h);
+  background-color: var(--fm-surface);
+  border-bottom: 1px solid var(--fm-border);
+  padding: 0 1.5rem;
+  position: sticky;        /* ติดอยู่บนสุดเมื่อ scroll */
+  top: 0;
+  z-index: 1000;           /* อยู่บนสุดกว่า elements อื่น */
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* container ข้างใน navbar — จัดซ้าย/ขวา */
+.fm-navbar-inner {
+  height: 100%;
+  display: flex;           /* จัดของแนวนอน */
+  align-items: center;     /* จัดกลางแนวตั้ง */
+  justify-content: space-between; /* ซ้ายสุด และ ขวาสุด */
+}
+
+/* Logo + ชื่อ FitMatch (ซ้าย) */
+.fm-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;                /* ระยะห่างระหว่าง logo กับ text */
+  text-decoration: none;   /* ไม่ขีดเส้นใต้ลิงก์ */
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.fm-brand-fit   { color: var(--fm-text); }    /* FIT = ขาว */
+.fm-brand-match { color: var(--fm-accent); }  /* MATCH = เขียว */
+
+/* รูป logo */
+.fm-brand-logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* User info + avatar (ขวา) */
+.fm-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;               /* ระยะห่างระหว่าง text กับ avatar */
+}
+
+/* ชื่อ + email (ด้านซ้ายของ avatar) */
+.fm-user-text {
+  text-align: right;
+}
+
+.fm-username {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--fm-text);
+  line-height: 1.2;
+}
+
+.fm-useremail {
+  font-size: 0.65rem;
+  color: var(--fm-text-muted);
+  line-height: 1.2;
+}
+
+/* วงกลม avatar */
+.fm-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;      /* ทำให้เป็นวงกลม */
+  background-color: var(--fm-surface-2);
+  border: 1px solid var(--fm-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--fm-text-muted);
+}
+
+/* ============================================================
+   Page wrapper — ใต้ navbar
+   ============================================================ */
+.fm-page-wrapper {
+  padding: 1.5rem;
+  min-height: calc(100vh - var(--fm-navbar-h));
+}
+
+/* ============================================================
+   Bootstrap focus overrides
+   ============================================================ */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus,
+.form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem var(--fm-bg), 0 0 0 0.25rem var(--fm-accent);
 }
