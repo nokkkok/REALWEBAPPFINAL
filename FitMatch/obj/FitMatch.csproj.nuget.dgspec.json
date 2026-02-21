@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Documents\\Alisa docs\\KMITL\\Years\\2-2\\Web App\\Project\\FitMatch\\WebApp_FitMatch\\FitMatch\\FitMatch.csproj": {}
+    "C:\\Users\\Admin\\Documents\\GitHub\\WebApp_FitMatch\\fitmatch\\FitMatch.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Documents\\Alisa docs\\KMITL\\Years\\2-2\\Web App\\Project\\FitMatch\\WebApp_FitMatch\\FitMatch\\FitMatch.csproj": {
+    "C:\\Users\\Admin\\Documents\\GitHub\\WebApp_FitMatch\\fitmatch\\FitMatch.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Documents\\Alisa docs\\KMITL\\Years\\2-2\\Web App\\Project\\FitMatch\\WebApp_FitMatch\\FitMatch\\FitMatch.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\WebApp_FitMatch\\fitmatch\\FitMatch.csproj",
         "projectName": "FitMatch",
-        "projectPath": "C:\\Users\\Admin\\Documents\\Alisa docs\\KMITL\\Years\\2-2\\Web App\\Project\\FitMatch\\WebApp_FitMatch\\FitMatch\\FitMatch.csproj",
+        "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\WebApp_FitMatch\\fitmatch\\FitMatch.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Documents\\Alisa docs\\KMITL\\Years\\2-2\\Web App\\Project\\FitMatch\\WebApp_FitMatch\\FitMatch\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\WebApp_FitMatch\\fitmatch\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,11 +38,35 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -62,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
