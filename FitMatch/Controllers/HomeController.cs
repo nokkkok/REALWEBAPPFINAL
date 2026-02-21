@@ -24,9 +24,9 @@
 // }
 
 using Microsoft.AspNetCore.Mvc;
-using project.Models;
+using FitMatch.Models;
 
-namespace project.Controllers
+namespace FitMatch.Controllers
 {
     public class HomeController : Controller
     {
