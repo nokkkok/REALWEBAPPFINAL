@@ -1,8 +1,52 @@
-﻿@{
+﻿@model IEnumerable<project.Models.Event>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <h1 class="title">Find Your Fitness Community</h1>
+
+
+    <div class="search-bar">
+        <input type="text" placeholder="SEARCH THE PLACE" />
+        <a asp-controller="Home" asp-action="Create" class="add-btn">+</a>
+    </div>
+
+    <div class="grid">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <img src="@item.ImageUrl" alt="@item.Name" />
+                <h3>@item.Name</h3>
+                <p>@item.Location</p>
+                <p>@item.EventDate.ToString("dd-MM-yyyy HH:mm")</p>
+                <p>@item.Description</p>
+            </div>
+        }
+    </div>
+</div>
+
+<button id="openSidebar" class="open-sidebar-btn">
+   ☰
+</button>
+
+<div id="sportSidebar" class="sidebar">
+    <div class="sidebar-content">
+        <i class="fa-solid fa-infinity sport-icon"></i>
+        <i class="fa-solid fa-person-running sport-icon"></i>
+        <i class="fa-solid fa-bicycle sport-icon"></i>
+        <i class="fa-solid fa-basketball sport-icon"></i>
+        <i class="fa-solid fa-football sport-icon"></i>
+        <i class="fa-solid fa-baseball sport-icon"></i>
+    </div>
+
+    <script>
+        const openBtn = document.getElementById("openSidebar");
+        const sidebar = document.getElementById("sportSidebar");
+
+        openBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("active");
+        });
+    </scirpt>
 </div>

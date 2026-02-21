@@ -1,0 +1,38 @@
+@model project.Models.Event
+
+<h2>Create Event</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label>Name</label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label>Location</label>
+        <input asp-for="Location" />
+    </div>
+
+    <div>
+        <label>Date</label>
+        <input asp-for="EventDate" type="datetime-local" />
+    </div>
+
+    <div>
+        <label>Description</label>
+        <textarea asp-for="Description"></textarea>
+    </div>
+
+    <div>
+        <label>Image URL</label>
+        <input asp-for="ImageUrl" />
+    </div>
+
+    <button type="submit">Create</button>
+        <!-- <input type="text" name="Name" placeholder="Community Name" required />
+        <input type="text" name="Location" placeholder="Location" required />
+        <input type="datetime-local" name="EventDate" required />
+        <input type="text" name="Description" placeholder="Description" required />
+        <input type="text" name="ImageUrl" placeholder="Image URL (e.g. /images/beach.jpg)." required />
+        <button type="submit">Add Community</button> -->
+</form>
