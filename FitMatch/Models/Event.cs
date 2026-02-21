@@ -1,4 +1,4 @@
-namespace project.Models
+namespace FitMatch.Models
 {
     public class Event
     {
