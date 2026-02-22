@@ -2,6 +2,93 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div>
-    <h1>Dashboard Test</h1>
+<div class="dashboard-container">
+    
+    <aside class="left-panel fm-card">
+        <div class="panel-header">
+            <h3 class="panel-title">My Activities</h3>
+        </div>
+        
+        <div id="activity-list" class="activity-list">
+            <p style="color: var(--fm-text-muted); text-align: center;">Loading your history...</p>
+        </div>
+    </aside>
+
+    <main class="right-panel">
+        
+        <div class="stat-card fm-card">
+            <h4 class="stat-title">Participated Rate</h4>
+            <div id="participated-rate-container">
+                <p style="color: var(--fm-text-muted);">Loading...</p>
+            </div>
+        </div>
+
+        <div class="stat-card fm-card">
+            <h4 class="stat-title">Activity Stats</h4>
+            <div id="activity-chart-container" class="placeholder-chart">
+                <p style="color: var(--fm-text-muted);">Loading chart...</p>
+            </div>
+        </div>
+
+        <div class="stat-card fm-card wide">
+            <h4 class="stat-title">Current Streak</h4>
+            <div id="streak-container">
+                <p style="color: var(--fm-text-muted);">Loading...</p>
+            </div>
+        </div>
+
+    </main>
 </div>
+
+@section Scripts {
+    <script>
+        // สมมติว่าตอนนี้ User ที่ Login เข้ามาคือ ID = 1 (เดี๋ยวตอนทำระบบ Login ค่อยมาเปลี่ยนเป็นตัวแปรจริง)
+        const currentUserId = 1; 
+
+        // 1. ฟังก์ชันไปขอดูข้อมูลจากเพื่อน
+        async function fetchUserActivities() {
+            try {
+                // วิ่งไปขอข้อมูลจาก API
+                const response = await fetch(`/api/PostAPI/${currentUserId}`);
+                
+                if (!response.ok) {
+                    throw new Error("ดึงข้อมูลไม่สำเร็จ");
+                }
+
+                const posts = await response.json(); // แปลงสิ่งที่ได้มาให้อ่านง่ายๆ
+                renderActivities(posts); // ส่งข้อมูลไปวาดลงหน้าเว็บ
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('activity-list').innerHTML = '<p style="color: red;">เกิดข้อผิดพลาดในการโหลดข้อมูล</p>';
+            }
+        }
+
+        // 2. ฟังก์ชันเอาข้อมูลมาวาดลงในกล่อง
+        function renderActivities(posts) {
+            const container = document.getElementById('activity-list');
+            container.innerHTML = ''; // ล้างข้อความ "Loading..." ออก
+
+            if (posts.length === 0) {
+                container.innerHTML = '<p style="color: var(--fm-text-muted);">คุณยังไม่มีประวัติกิจกรรม</p>';
+                return;
+            }
+
+            // วนลูปสร้างกล่องกิจกรรมตามจำนวนข้อมูลที่ได้มา
+            posts.forEach(post => {
+                const cardHtml = `
+                    <div class="fm-card" style="background-color: var(--fm-surface-2); padding: 12px; margin-bottom: 8px;">
+                        <h4 style="margin: 0; color: var(--fm-text);">${post.title}</h4>
+                        <p style="margin: 4px 0 0 0; font-size: 0.85rem; color: var(--fm-text-muted);">
+                            📍 ${post.location} | 📅 ${post.date} 🕒 ${post.time}
+                        </p>
+                    </div>
+                `;
+                container.innerHTML += cardHtml; // ยัดใส่ div
+            });
+        }
+
+        // 3. สั่งให้ฟังก์ชันทำงานทันทีที่โหลดหน้าเว็บเสร็จ
+        fetchUserActivities();
+    </script>
+}
