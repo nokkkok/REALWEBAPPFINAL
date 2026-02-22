@@ -1,0 +1,163 @@
+@model User
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card profile-card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Edit Profile</h2>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @foreach (var modelState in ViewData.ModelState.Values)
+                            {
+                                @foreach (var error in modelState.Errors)
+                                {
+                                    <p>@error.ErrorMessage</p>
+                                }
+                            }
+                        </div>
+                    }
+
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Email" />
+                        <input type="hidden" asp-for="PasswordHash" />
+                        <input type="hidden" asp-for="CreatedAt" />
+
+                        <!-- Profile Picture Preview -->
+                        <div class="text-center mb-4">
+                            @if (!string.IsNullOrEmpty(Model.ProfileUrl))
+                            {
+                                <img src="@Model.ProfileUrl" alt="Profile Picture" class="profile-preview rounded-circle mb-3" id="profilePreview" />
+                            }
+                            else
+                            {
+                                <div class="profile-preview-placeholder rounded-circle mb-3" id="profilePreviewPlaceholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="profileImage" class="form-label">Profile Picture</label>
+                            <input type="file" class="form-control" id="profileImage" name="profileImage" accept="image/*" onchange="previewImage(event)" />
+                            <small class="text-muted">Max file size: 5MB. Supported: JPG, PNG, GIF</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label">Username</label>
+                            <input type="text" class="form-control" asp-for="Username" placeholder="Enter your username" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email-display" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email-display" value="@Model.Email" disabled />
+                            <small class="text-muted">Email cannot be changed</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Info" class="form-label">Bio</label>
+                            <textarea class="form-control" asp-for="Info" rows="4" placeholder="Tell us about yourself..." maxlength="500"></textarea>
+                            <div class="form-text">Max 500 characters</div>
+                            <span asp-validation-for="Info" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-success me-2">Save Changes</button>
+                            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(0, 255, 153, 0.3);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+    }
+
+    .profile-preview {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border: 3px solid #00ff99;
+        box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+    }
+
+    .profile-preview-placeholder {
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 255, 153, 0.1);
+        border: 3px solid #00ff99;
+        margin: 0 auto;
+        font-size: 60px;
+        color: #00ff99;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-color: rgba(0, 255, 153, 0.3) !important;
+        color: white !important;
+    }
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-color: #00ff99 !important;
+        box-shadow: 0 0 10px rgba(0, 255, 153, 0.3) !important;
+    }
+
+    .form-label {
+        color: #00ff99;
+        font-weight: 500;
+    }
+</style>
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('profilePreview');
+        const placeholder = document.getElementById('profilePreviewPlaceholder');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                if (placeholder) {
+                    placeholder.style.display = 'none';
+                }
+                if (preview) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                } else {
+                    // Create preview image if it doesn't exist
+                    const img = document.createElement('img');
+                    img.id = 'profilePreview';
+                    img.src = e.target.result;
+                    img.className = 'profile-preview rounded-circle mb-3';
+                    document.querySelector('.text-center').insertBefore(img, document.getElementById('profileImage').parentElement);
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

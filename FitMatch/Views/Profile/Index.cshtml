@@ -1,0 +1,107 @@
+@model User
+
+@{
+    ViewData["Title"] = "Profile - " + Model.Username;
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card profile-card">
+                <div class="card-body">
+                    <div class="profile-header text-center mb-4">
+                        @if (!string.IsNullOrEmpty(Model.ProfileUrl))
+                        {
+                            <img src="@Model.ProfileUrl" alt="Profile Picture" class="profile-image rounded-circle mb-3" />
+                        }
+                        else
+                        {
+                            <div class="profile-image-placeholder rounded-circle mb-3">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        }
+                        
+                        <h2 class="profile-username">@Model.Username</h2>
+                        <p class="text-muted">@Model.Email</p>
+                    </div>
+
+                    <div class="profile-info mb-4">
+                        <h5>Bio</h5>
+                        @if (!string.IsNullOrEmpty(Model.Info))
+                        {
+                            <p class="profile-bio">@Model.Info</p>
+                        }
+                        else
+                        {
+                            <p class="text-muted">No bio added yet</p>
+                        }
+                    </div>
+
+                    <div class="profile-meta text-muted">
+                        <small>Member since: @Model.CreatedAt.ToString("MMMM dd, yyyy")</small>
+                    </div>
+
+                    <div class="profile-actions mt-4">
+                        @{
+                            var currentUserId = Context.Session.GetInt32("UserId");
+                        }
+
+                        @if (currentUserId == Model.Id)
+                        {
+                            <a asp-action="Edit" class="btn btn-primary">Edit Profile</a>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(0, 255, 153, 0.3);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border: 3px solid #00ff99;
+        box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+    }
+
+    .profile-image-placeholder {
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 255, 153, 0.1);
+        border: 3px solid #00ff99;
+        margin: 0 auto;
+        font-size: 60px;
+        color: #00ff99;
+    }
+
+    .profile-username {
+        color: #00ff99;
+        font-weight: bold;
+    }
+
+    .profile-bio {
+        color: #cccccc;
+        line-height: 1.6;
+    }
+
+    .profile-actions .btn {
+        margin-right: 10px;
+    }
+</style>

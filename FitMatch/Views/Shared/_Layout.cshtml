@@ -19,8 +19,23 @@
                 </div>
 
                 <div class="auth-links">
-                    <a href="#">Register</a>
-                    <a href="#">Login</a>
+                    @{
+                        var userId = Context.Session.GetInt32("UserId");
+                        var username = Context.Session.GetString("Username");
+                    }
+                    
+                    @if (userId.HasValue)
+                    {
+                        <a asp-controller="Profile" asp-action="Index" class="nav-profile">Profile</a>
+                        <span class="nav-user">Welcome, @username!</span>
+                        <a asp-controller="Account" asp-action="Logout" class="nav-logout">Logout</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Register">Register</a>
+                        <a asp-controller="Account" asp-action="Login">Login</a>
+                    }
+                </div>
             </div>
         </nav>
     </header>

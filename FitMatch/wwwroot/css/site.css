@@ -50,7 +50,7 @@ body {
   margin-top: 40px;
   margin-bottom: 30px;
   background: linear-gradient(90deg, #00ff99, #00cc66);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
 }
 
@@ -267,7 +267,7 @@ form button:active {
   font-weight: bold;
   text-decoration: none;
   background: linear-gradient(90deg, #00ff99, #00cc66);
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
 }
 
@@ -284,6 +284,39 @@ form button:active {
 .auth-links a:hover {
   color: #00ff99;
   text-shadow: 0 0 10px #00ff99;
+}
+
+.nav-user {
+  margin-left: 20px;
+  color: #00ff99;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-profile {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.nav-profile:hover {
+  color: #00ff99;
+  text-shadow: 0 0 10px #00ff99;
+}
+
+.nav-logout {
+  margin-left: 15px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.nav-logout:hover {
+  color: #ff6b6b;
+  text-shadow: 0 0 10px #ff6b6b;
 }
 
 form {
