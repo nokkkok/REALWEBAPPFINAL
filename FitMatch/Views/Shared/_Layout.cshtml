@@ -26,6 +26,10 @@
                         <img src="@(ViewData["UserAvatar"] ?? "/images/imageAvatar.png")" alt="profile" />
                     </div>
                 </div>
+
+                <div class="auth-links">
+                    <a href="#">Register</a>
+                    <a href="#">Login</a>
             </div>
         </nav>
     </header>
@@ -35,8 +39,25 @@
             @RenderBody()
         </main>
     </div>
-    
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<!-- <nav class="custom-navbar">
+    <div class="nav-container">
+
+        <div class="nav-links">
+            <a asp-controller="Home" asp-action="Index">FITMATCH</a>
+        </div>
+
+    </div>
+</nav> -->
