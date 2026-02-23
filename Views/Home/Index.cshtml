@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div id = "postList">test</div>
+</div>
+
+<script>
+    async function loadPost(){
+        const res = await fetch("/api/posts");
+        const posts = await res.json();
+
+        let html = "";
+        posts.forEach(p =>{
+            html += `
+                <div class = "card mb-3 p-3">
+                    <h4>${p.title}</h4>
+                    <p>${p.description}</p>
+                    <small>${p.memberCount} |  ${p.time} | ${new Date(p.createDate).toLocaleString()}</small>
+                    <button onclick = "join()">join</button>
+                </div>
+
+            `;
+        });
+        document.getElementById("postList").innerHTML = html;
+        
+    }
+    loadPost();
+</script>
+
